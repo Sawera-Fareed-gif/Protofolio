@@ -11,8 +11,8 @@ A personal portfolio website showcasing my projects, skills, and certifications 
 
 ## 🔗 Live Site
 
-**[View Portfolio](#)**  
-*(Replace the `#` above with your GitHub Pages link once available, e.g. `https://sawera-fareed-gif.github.io/portfolio/`)*
+[https://sawera-fareed-gif.github.io/Protofolio/](#)  
+
 
 ---
 
