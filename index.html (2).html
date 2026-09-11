@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sawera Fareed — Portfolio</title>
+
+<!-- SEO meta tags: help Google understand and display this page -->
+<meta name="description" content="Sawera Fareed — Software Engineering student portfolio featuring Java, SQL, and web development projects including Snakes & Ladders, SkillSwap, and a UCP registration form.">
+<meta name="author" content="Sawera Fareed">
+
+<!-- Open Graph tags: control how the link looks when shared on social media -->
+<meta property="og:title" content="Sawera Fareed — Portfolio">
+<meta property="og:description" content="Software Engineering student portfolio — Java, SQL & Web Development projects.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+    :root {
+        --bg: #0f1420;
+        --surface: #161d2b;
+        --border: #2a3345;
+        --text-primary: #e8ecf3;
+        --text-muted: #8b97ad;
+        --accent: #ffb454;
+        --accent-soft: rgba(255, 180, 84, 0.12);
+        --font-head: 'Space Grotesk', sans-serif;
+        --font-body: 'Inter', sans-serif;
+        --max-width: 880px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    section {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 70px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    h1, h2, h3 { font-family: var(--font-head); margin: 0; }
+
+    h2.section-title {
+        font-size: 22px;
+        margin-bottom: 32px;
+        color: var(--text-primary);
+    }
+
+    p { color: var(--text-muted); margin: 0; }
+
+    /* NAVBAR */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(15, 20, 32, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 18px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-logo {
+        font-family: var(--font-head);
+        font-weight: 700;
+        font-size: 18px;
+    }
+    .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-links a {
+        font-size: 14px;
+        color: var(--text-muted);
+        position: relative;
+        padding-bottom: 4px;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--accent);
+        transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+    }
+    .nav-toggle span {
+        width: 22px;
+        height: 2px;
+        background: var(--text-primary);
+    }
+
+    /* HERO */
+    .hero { padding-top: 90px; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+    .hero-tag {
+        display: inline-block;
+        font-size: 13px;
+        color: var(--accent);
+        border: 1px solid var(--accent-soft);
+        background: var(--accent-soft);
+        padding: 5px 12px;
+        border-radius: 5px;
+        margin-bottom: 22px;
+    }
+    .hero h1 {
+        font-size: clamp(32px, 5vw, 46px);
+        line-height: 1.15;
+        margin-bottom: 16px;
+    }
+    .hero p.lead {
+        font-size: 17px;
+        max-width: 60ch;
+        margin-bottom: 36px;
+    }
+    .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
+    .stat { border-left: 1px solid var(--border); padding-left: 14px; }
+    .stat strong {
+        display: block;
+        font-family: var(--font-head);
+        font-size: 24px;
+        color: var(--text-primary);
+    }
+    .stat span { font-size: 13px; color: var(--text-muted); }
+
+    /* ABOUT */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+    .avatar {
+        width: 96px;
+        height: 96px;
+        border: 1px solid var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-head);
+        font-size: 26px;
+        color: var(--accent);
+    }
+    .avatar-img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border: 1px solid var(--accent);
+    }
+    .about-text p { margin-bottom: 14px; color: var(--text-muted); }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    /* SKILLS */
+    .skills-group { margin-bottom: 24px; }
+    .skills-group:last-child { margin-bottom: 0; }
+    .skills-group h3 {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-weight: 500;
+        margin-bottom: 12px;
+        font-family: var(--font-body);
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag {
+        font-size: 13px;
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        color: var(--text-primary);
+    }
+
+    /* PROJECTS */
+    .project {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px 20px;
+        padding: 22px 0;
+        border-top: 1px solid var(--border);
+    }
+    .project:last-child { padding-bottom: 0; }
+    .project-title {
+        font-family: var(--font-head);
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+    .project-role { font-size: 13px; color: var(--accent); margin-bottom: 8px; }
+    .project-desc {
+        grid-column: 1 / 2;
+        font-size: 14.5px;
+        color: var(--text-muted);
+        max-width: 62ch;
+    }
+    .project-link {
+        grid-column: 2 / 3;
+        grid-row: 1 / 4;
+        align-self: center;
+        font-size: 13px;
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        padding: 7px 14px;
+        border-radius: 5px;
+        white-space: nowrap;
+        height: fit-content;
+    }
+    .project-link:hover { border-color: var(--accent); color: var(--accent); }
+    .project-tags {
+        grid-column: 1 / 2;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+    .project-tags span { font-size: 12px; color: var(--text-muted); }
+    .project-tags span:not(:last-child)::after {
+        content: "·";
+        margin-left: 8px;
+        color: var(--border);
+    }
+
+    /* CERTIFICATES */
+    .cert {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 0;
+        border-top: 1px solid var(--border);
+        font-size: 14.5px;
+    }
+    .cert:last-child { border-bottom: none; }
+    .cert-name { color: var(--text-primary); }
+    .cert-meta { color: var(--text-muted); font-size: 13px; }
+
+    /* CONTACT */
+    .contact-row { display: flex; gap: 32px; flex-wrap: wrap; }
+    .contact-row a {
+        font-size: 15px;
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 3px;
+    }
+    .contact-row a:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer { text-align: center; padding: 30px 24px; font-size: 13px; color: var(--text-muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+        .nav-links {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            flex-direction: column;
+            gap: 0;
+            display: none;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-links.open { display: flex; }
+        .nav-links li { border-top: 1px solid var(--border); }
+        .nav-links a { display: block; padding: 14px 24px; }
+        .nav-toggle { display: flex; }
+        .about-grid { grid-template-columns: 1fr; }
+        .project { grid-template-columns: 1fr; }
+        .project-link {
+            grid-column: 1 / 2;
+            grid-row: auto;
+            margin-top: 12px;
+            display: inline-block;
+            width: fit-content;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="nav-inner">
+        <div class="nav-logo">SF</div>
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- HERO — edit the tagline/intro text below -->
+<section class="hero">
+    <span class="hero-tag">Software Engineering Student · SE28, UCP</span>
+    <h1>Sawera Fareed</h1>
+    <p class="lead">
+        I build software across the full stack — from normalized database schemas and Java systems
+        to front-end interfaces — and document the engineering process behind them with the same
+        care I put into the code.
+    </p>
+
+    <div class="hero-stats">
+        <div class="stat">
+            <strong>7</strong>
+            <span>Projects Built</span>
+        </div>
+        <div class="stat">
+            <strong>3</strong>
+            <span>Certifications</span>
+        </div>
+        <div class="stat">
+            <strong>Java · SQL · Web</strong>
+            <span>Core Focus</span>
+        </div>
+    </div>
+</section>
+
+
+<section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="about-grid">
+        <img src="c:\Users\CUI\Desktop\Html files\your-photo.jpg" class="avatar-img" alt="Sawera Fareed">
+        <div class="about-text">
+            <p>
+                I'm a Software Engineering student at the University of Central Punjab, working across
+                the stack — from relational database design and Java application logic to front-end
+                interfaces built with HTML, CSS, and JavaScript.
+            </p>
+            <p>
+                My projects range from documenting a complete software engineering lifecycle for a
+                peer-to-peer platform — requirements, UML modeling, and UI prototyping — to building a
+                Java board game from custom-implemented data structures. I care about systems that are
+                technically sound and genuinely usable.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <h2 class="section-title">Skills</h2>
+
+    <div class="skills-group">
+        <h3>Languages</h3>
+        <div class="tag-row">
+            <span class="tag">Java</span>
+            <span class="tag">SQL</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+        </div>
+    </div>
+
+    <div class="skills-group">
+        <h3>Concepts</h3>
+        <div class="tag-row">
+            <span class="tag">Object-Oriented Programming</span>
+            <span class="tag">Data Structures &amp; Algorithms</span>
+            <span class="tag">Database Design (3NF)</span>
+            <span class="tag">Requirements &amp; UML Modeling</span>
+            <span class="tag">File I/O</span>
+        </div>
+    </div>
+
+    <div class="skills-group">
+        <h3>Tools</h3>
+        <div class="tag-row">
+            <span class="tag">Git &amp; GitHub</span>
+            <span class="tag">Figma</span>
+            <span class="tag">draw.io</span>
+            <span class="tag">VS Code</span>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project">
+        <div>
+            <div class="project-title">SkillSwap — Peer-to-Peer Academic Barter Platform</div>
+            <div class="project-role">Software Engineering Project</div>
+        </div>
+        <a href="#" class="project-link">Docs on request</a>
+        <p class="project-desc">
+            Owned the full software engineering lifecycle for a peer tutoring / skill-exchange
+            platform — authored the SRS, wrote user stories and use-case specifications, and modeled
+            the system with 6+ UML diagram types (use case, activity, state, sequence, component,
+            deployment). Translated requirements into a working UI by prototyping the interface in
+            Figma, aligning every screen flow to the documented use cases.
+        </p>
+        <div class="project-tags">
+            <span>SRS</span>
+            <span>UML Modeling</span>
+            <span>Figma</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">Online Food Delivery System</div>
+            <div class="project-role">SQL · Database Design</div>
+        </div>
+        <a href="#" class="project-link">Docs on request</a>
+        <p class="project-desc">
+            Designed a normalized 6-table relational schema from requirements through 3NF, then wrote
+            complex SQL queries — multi-table joins, nested and correlated subqueries, and views — to
+            support order tracking, restaurant management, and delivery assignment logic.
+        </p>
+        <div class="project-tags">
+            <span>SQL</span>
+            <span>Relational Design</span>
+            <span>3NF</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">Snakes &amp; Ladders Game</div>
+            <div class="project-role">Java (Swing) · Data Structures</div>
+        </div>
+        <a href="https://github.com/Sawera-Fareed-gif/DSA_Final_Project" class="project-link" target="_blank">View on GitHub</a>
+        <p class="project-desc">
+            Final-year DSA project built with a Swing GUI, backed by 5 custom-implemented data
+            structures (array, HashMap, custom Stack, custom Queue, custom LinkedList) across 9 Java
+            files, with a full GitHub submission guide and README.
+        </p>
+        <div class="project-tags">
+            <span>Java</span>
+            <span>Swing</span>
+            <span>Custom DSA</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">Hospital Management System</div>
+            <div class="project-role">Java · OOP · File I/O</div>
+        </div>
+        <a href="https://github.com/Sawera-Fareed-gif/OOP-Project-Hospital-Mangment-System" class="project-link" target="_blank">View on GitHub</a>
+        <p class="project-desc">
+            An object-oriented hospital records system covering patient, doctor, and appointment
+            management, using file handling for persistent data storage.
+        </p>
+        <div class="project-tags">
+            <span>Java</span>
+            <span>OOP</span>
+            <span>File I/O</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">Rule-Based Offline ChatBot</div>
+            <div class="project-role">Java</div>
+        </div>
+        <a href="https://github.com/Sawera-Fareed-gif/AI_ChatBot" class="project-link" target="_blank">View on GitHub</a>
+        <p class="project-desc">
+            A rule-based conversational chatbot that runs fully offline, matching user input against
+            predefined patterns to generate responses without relying on external APIs.
+        </p>
+        <div class="project-tags">
+            <span>Java</span>
+            <span>Rule-Based Logic</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">UCP Bachelor Programs Registration Form</div>
+            <div class="project-role">HTML · CSS · JavaScript</div>
+        </div>
+        <a href="https://github.com/Sawera-Fareed-gif/UCP-Registration-Form" class="project-link" target="_blank">View on GitHub</a>
+        <p class="project-desc">
+            A responsive admission registration form with a card-based layout, custom-styled inputs,
+            and dynamic degree-selection feedback powered by JavaScript.
+        </p>
+        <div class="project-tags">
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+            <span>Responsive Design</span>
+        </div>
+    </div>
+
+    <div class="project">
+        <div>
+            <div class="project-title">Calculator</div>
+            <div class="project-role">Java (Swing GUI)</div>
+        </div>
+        <a href="https://github.com/Sawera-Fareed-gif/CalculatorProject" class="project-link" target="_blank">View on GitHub</a>
+        <p class="project-desc">
+            A desktop calculator application with a Swing-based graphical interface supporting
+            standard arithmetic operations.
+        </p>
+        <div class="project-tags">
+            <span>Java</span>
+            <span>Swing</span>
+        </div>
+    </div>
+
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+    <h2 class="section-title">Certificates</h2>
+
+    <div class="cert">
+        <span class="cert-name">Data Labeling Job Simulation</span>
+        <span class="cert-meta">Forage · 2026</span>
+    </div>
+    <div class="cert">
+        <span class="cert-name">UI/UX Design Certificate</span>
+        <span class="cert-meta">Google · 2025</span>
+    </div>
+    <div class="cert">
+        <span class="cert-name">LinkedIn Learning Certificate</span>
+        <span class="cert-meta">Coursera · 2025</span>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-row">
+        <a href="mailto:za3060873@gmail.com">za3060873@gmail.com</a>
+        <a href="https://github.com/Sawera-Fareed-gif" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/sawera-fareed-84961035b/" target="_blank">LinkedIn</a>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 Sawera Fareed. Built with HTML, CSS &amp; JavaScript.
+</footer>
+
+<script>
+    // Toggles the mobile navigation menu open/closed when the
+    // hamburger icon is clicked (only visible on small screens).
+    function toggleNav() {
+        document.getElementById("navLinks").classList.toggle("open");
+    }
+</script>
+
+</body>
+</html>
